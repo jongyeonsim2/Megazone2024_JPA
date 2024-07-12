@@ -30,3 +30,8 @@
           
          JPA -> 하이버네이트 -> Spring JPA
          
+         					    MySQL, Oracle 등
+         java <-> 하이버네이트 <-> H2 데이터베이스
+         VO        SQL 생성
+         
+         
