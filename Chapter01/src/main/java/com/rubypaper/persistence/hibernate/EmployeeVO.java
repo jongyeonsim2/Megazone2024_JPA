@@ -29,5 +29,5 @@ public class EmployeeVO {
 	
 	private Double salary;	
 	
-	private String email;
+	//private String email;
 }
