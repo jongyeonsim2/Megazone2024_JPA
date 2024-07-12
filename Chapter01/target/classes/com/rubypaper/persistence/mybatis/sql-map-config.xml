@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<!-- EmployeeVO 를 myBatis 내에서 조회 결과, 신규 데이터 입력용 객체 선언,
+     사요할 이름을 지정. => alias="employee"
+	
+	대상은 EmployeeVO 하고 myBatis 내부에서 사용할 이를은 employee 로 설정.
+ -->
+<typeAliases>
+	<typeAlias alias="employee" 
+type="com.rubypaper.persistence.mybatis.EmployeeVO" />
+</typeAliases>
+
+<environments default="development">
+	<environment id="development">
+	    <transactionManager type="JDBC" />
+	    <!-- Connction Pool
+	    	mysql client <-> DB server
+	    	  접속 정보를 이용해서 로그인 -> session 성립 : DB 사용하기 위한 전처리
+	    
+	       	미리 접속된 connection 을 생성을 해서 보관한 후,
+	                요청을 받으면, connection 하나를 반환함.
+	                따라서, 바로 연결된것으로 사용하면 됨. 접속을 위한 전처리가 필요 없음.
+	                
+	        default connection 갯수 : 10
+	     -->
+	    <dataSource type="POOLED">
+		<property name="driver" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:tcp://localhost/./test" />
+		<property name="username" value="sa" />
+		<property name="password" value="sa" />
+	    </dataSource>
+	</environment>
+</environments>
+
+<mappers>
+	<!-- 서비스 별로 관리하는 SQL 매퍼 -->
+	<mapper resource="com/rubypaper/persistence/mybatis/s_emp-mapping.xml" />
+</mappers>
+</configuration>

@@ -1,0 +1,29 @@
+1. JPA
+   1.1 발전 흐름
+       - JDBC( Java DataBase Connectivity )
+         Java code + sql 이 혼재. => 유지보수 및 확장성 문제
+         
+         ex. com.rubypaper.persistence.jdbcEmployeeDAO
+         
+       - SQL Mapper
+         Java code 와 sql 을 완전 분리.
+         sql 서비스별 관리가 가능. => 응집도 높아지니까, 재사용성이 높아짐. 
+         					  SQL 코드 품질 향상,  SQL 성능이 높아짐.
+                  대표적으로 MyBatis 를 사용. 
+                  
+         MyBatis SQL 관리 파일
+           - 서비스를 위한 sql( 응집도 향상 목적 )
+             ex. p.50, s_emp-mapping.xml
+             
+           - 데이터베이스 접속과 관련한 설정 정보
+             ex. sql-map-config.xml
+       
+       - ORM( 객체관계매퍼 )
+         SQL Mapper 로 SQL을 분리를 해서 관리할 수 있지만,
+                  그래도, SQL을 사용하면서 관리해야 하는 불편함.
+         ( 순수 객체지향으로 DB 관련까지 개발하면 좋겠다...
+         	=> SQL 이 없어도 가능하지 않을까?
+          )
+          
+         JPA -> 하이버네이트 -> Spring JPA
+         
