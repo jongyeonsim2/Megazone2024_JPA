@@ -18,6 +18,9 @@
            - 데이터베이스 접속과 관련한 설정 정보
              ex. sql-map-config.xml
        
+         MyBatis 참고 사이트 - 한글 매뉴얼
+         https://mybatis.org/mybatis-3/ko/index.html
+       
        - ORM( 객체관계매퍼 )
          SQL Mapper 로 SQL을 분리를 해서 관리할 수 있지만,
                   그래도, SQL을 사용하면서 관리해야 하는 불편함.
