@@ -55,6 +55,7 @@ public class Employee1ServiceClient2 {
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
+			tx.rollback();
 		} finally {
 			em.close();
 			emf.close();
