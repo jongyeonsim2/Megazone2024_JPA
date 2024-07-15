@@ -1,0 +1,22 @@
+1. pom.xml
+
+H2 : 2.2.224
+하이버네이트 : 5.6.9.Final
+
+maven -> update project 실시
+Chapter02 의 Employee9ServiceClient2 실행 후 정상 실행 확인
+
+- Employee9 table 생성 확인
+- Employee9_sequence 이름으로 sequence 생성 확인
+
+2.  H2 server 접속 후 아래의 sql 문장 실행
+
+SELECT H2VERSION() FROM dual; 
+2.2.224
+
+
+
+
+<!--  --><version>1.4.199</version> -->
+
+
