@@ -7,9 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.rubypaper.biz.domain.Employee3;
+import com.rubypaper.biz.domain.Employee5;
 
-public class Employee3ServiceClient {
+public class Employee5ServiceClient {
 
 	public static void main(String[] args) {
 		// <persistence-unit name="Chapter02"> 의 설정 정보를 참조
@@ -23,16 +23,18 @@ public class Employee3ServiceClient {
 		
 		try {
 			// 영속성 관리 엔터티 생성
-			Employee3 employee = new Employee3();
+			Employee5 employee = new Employee5();
 			
-			//employee.setId(1L);
-			employee.setId(4L);
-			employee.setName("홍길동4");
-			employee.setMailId("hong4");
+			employee.setId(1L);
+			employee.setName("홍길동");
+			employee.setMailId("hong");
 			employee.setStartDate(new Date());
 			employee.setTitle("대리");
 			employee.setDeptName("개발부");
 			employee.setSalary(2500.00);
+			
+			// commisionPct의 허용 값 : 10, 12.5, 15, 17.5, 20 
+			// Check constraint violation: "CONSTRAINT_4351
 			employee.setCommisionPct(12.50);
 			
 			// 트랜잭션 시작
