@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -18,16 +19,21 @@ import lombok.Data;
  * 식별자 생성 전략( 중요 )
  * p.118 참고
  * 
- * Identity 전략을 사용한 실습
+ * Sequence 사용한 실습
  * 
  */
 
 @Data
 @Entity
-@Table(name = "Employee8")
-public class Employee8 {
+@Table(name = "Employee9")
+@SequenceGenerator(name = "Employee9_GENERATOR",
+					sequenceName = "Employee9_sequence",
+					initialValue = 1,//sequence 초기값
+					allocationSize = 1)//sequecne 의 할당값
+public class Employee9 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+				generator = "Employee9_GENERATOR")
 	private Long id;
 	
 	private String name;
