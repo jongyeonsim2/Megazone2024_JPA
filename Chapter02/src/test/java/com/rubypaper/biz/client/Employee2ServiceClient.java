@@ -7,19 +7,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.rubypaper.biz.domain.Employee1;
+import com.rubypaper.biz.domain.Employee2;
 
-/*
- * JPA 관리한 Entity 생성
- * - Entity 를 이용해서 데이터 삽입하는 테스트
- *   1. EntityManagerFactory 이용해서 EntityManager를 생성
- *   2. EntityManager 를 이용해서 영속성 관리
- *      persist()
- */
-
-public class Employee1ServiceClient2 {
+public class Employee2ServiceClient {
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 
 		// <persistence-unit name="Chapter02"> 의 설정 정보를 참조
@@ -33,10 +26,9 @@ public class Employee1ServiceClient2 {
 		
 		try {
 			// 영속성 관리 엔터티 생성
-			Employee1 employee = new Employee1();
+			Employee2 employee = new Employee2();
 			
-			//employee.setId(1L);
-			employee.setId(2L);
+			employee.setId(1L);
 			employee.setName("홍길동");
 			employee.setMailId("hong");
 			employee.setStartDate(new Date());
@@ -60,5 +52,7 @@ public class Employee1ServiceClient2 {
 			emf.close();
 		}
 	}
+
+
 
 }
