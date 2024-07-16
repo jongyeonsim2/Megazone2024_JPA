@@ -8,10 +8,10 @@ import javax.persistence.Persistence;
 import com.rubypaper.biz.domain.Employee1;
 
 /*
- * 
+ * 엔터티 분리 상태 실습
  */
 
-public class Employee1ServiceClient {
+public class Employee1ServiceClient3 {
 
 	public static void main(String[] args) {
 		EntityManagerFactory emf = 
@@ -41,40 +41,27 @@ public class Employee1ServiceClient {
 			// 트랜잭션 종료
 			tx.commit();
 			
-			// Entity 수정
-			// 결과적으로 update 문장이 h2 db에 전송.
-			/*
-			 * Ditry Check(더티 체크)
-			 * 영속성 컨테이너는 관리중인 엔터티의 변경이 되는 순간, 변경을
-			 * 감지하여 데이터베이스에 update 문장을 전송.
-			 * 
-			 */
-			tx.begin();
-			employee.setName("이름수정1");
-			// 트랜잭션 종료
-			tx.commit();
 			
-			// DB 변경 사항을 반영하려면,
-			// 트랜잭션 내부에서 수행을 해야함.
-			employee.setName("이름수정2");
+			//***** 엔터티 분리 실습 시작 ******//
+			if(em.contains(employee)) {
+				System.out.println("영속성 컨테이너에 등록된 상태.");
+			}
 			
+			// 엔터티 분리
+			em.detach(employee);
+			if(!em.contains(employee)) {
+				System.out.println("영속성 컨테이너에서 분리된 상태.");
+			}
+
+			employee.setName("이름수정");
 			
-			//*********** 영속성 컨테이너 등록, Entity Manager 의 find() ****//
+			// 분리 상태의 엔터티는 수정을 하더라도 반영이 안됨.
+			
+			// 분리 상태의 엔터티를 find() 를 사용하여 조회하면,
+			// select 문장이 생성되어, DB 에서 조회가 됨.
+			// 조회된 사원정보가 컨테이너에 엔터로 등록이 되었음을 의미함.
 			Employee1 findEmp = em.find(Employee1.class, 1L);
 			System.out.println(findEmp.toString());
-			
-			/*
-			 * 1. find() 메소드를 사용한다고 해서 항상 DB에서 조회하는건 아님.
-			 * 	  영속성 컨테이너에서 먼저 조회 후 없으면 DB 에서 조회.
-			 * 2. 조회된 사원정보의 이름과 DB의 사원정보의 이름이 다름.
-			 *   entity는 컨테이너에서 관리되고 있지만,
-			 *   변경사항이 DB로 전송되지 않은 상태.
-			 * 
-			 */
-			
-			Employee1 findEmp2 = em.find(Employee1.class, 2);
-			System.out.println(findEmp2.toString());
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
