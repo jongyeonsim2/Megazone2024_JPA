@@ -22,7 +22,7 @@ public class Employee12ServiceClient {
 		
 		try {
 			// 복합키 식별자 객체 생성
-			Employee12Id empId = new Employee12Id(6L, "hong6");
+			Employee12Id empId = new Employee12Id(7L, "hong7");
 			
 			// 사원 객체 생성
 			Employee12 employee = new Employee12();
@@ -39,7 +39,7 @@ public class Employee12ServiceClient {
 			tx.commit();
 			
 			//등록 사원 정보 검색 : 식별자 클래스 활용
-			Employee12Id searchEmpId = new Employee12Id(6L, "hong6");
+			Employee12Id searchEmpId = new Employee12Id(7L, "hong7");
 			Employee12 findEmployee = em.find(Employee12.class, searchEmpId);
 			
 			System.out.println("검색된 사원 정보 : " + findEmployee.toString());
