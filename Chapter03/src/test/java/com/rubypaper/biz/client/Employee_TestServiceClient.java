@@ -6,17 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.rubypaper.biz.domain.Employee1;
+import com.rubypaper.biz.domain.Employee_Test;
 
 /*
- * JPA 관리한 Entity 생성
- * - Entity 를 이용해서 데이터 삽입하는 테스트
- *   1. EntityManagerFactory 이용해서 EntityManager를 생성
- *   2. EntityManager 를 이용해서 영속성 관리
- *      persist()
+ * Chapter03 의 JPA 개발 및 테스트 환경 테스트 엔터티 클래스
+ * Chapter02 에서 복사함.
+ * 
  */
 
-public class Employee1ServiceClient1 {
+public class Employee_TestServiceClient {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -29,7 +27,7 @@ public class Employee1ServiceClient1 {
 		
 		try {
 			// 영속성 관리 엔터티 생성
-			Employee1 employee = new Employee1();
+			Employee_Test employee = new Employee_Test();
 			
 			employee.setId(1L);
 			employee.setName("홍길동");
