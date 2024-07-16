@@ -12,7 +12,7 @@ JPA(Java Persistence API)
 	식별자 변수(멤버)에 값이 할당되지 않은 엔터티는 JPA 가 관리할 수 없음.
 	
 3.	JPA는 식별자 변수에 유일한 값을 자동으로 할당하기 위해
-	Identity, Sequence, Table, Auto 의 4 가지 젼략을 제공하고 있음.
+	Identity, Sequence, Table, Auto 의 4 가지 전략을 제공하고 있음.
 	그리고, 복합키를 식별자 클래스 기반으로도 사용할 수 있음.
 	
 	
