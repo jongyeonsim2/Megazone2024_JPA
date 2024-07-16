@@ -53,6 +53,8 @@ public class Employee1ServiceClient5 {
 				System.out.println("영속성 컨테이너에서 분리된 상태.");
 			}
 
+			employee.setName("이름변경");
+			
 			//***** 엔터티 분리 -> 관리 실습 시작 ******//
 			em.merge(employee);
 			
