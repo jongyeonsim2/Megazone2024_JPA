@@ -49,6 +49,34 @@ public class Employee1ServiceClient6 {
 	static void mergeEmployee(Employee1 employee) {
 		System.out.println("============= mergeEmployee() end =============");
 		
+		// 두 번째 영속성 컨테이너 시작
+		EntityManager em2 = emf.createEntityManager();
+		EntityTransaction tx2 = em2.getTransaction();
+		
+		// 병합 : 준영속 상태의 employee 엔터티를 영속 상태로 변경
+		// main() 에서 mergeEmployee() 를 호출하기 전에
+		// 준영속 상태의 entity가 변경이 발생함. => 수정한 내용을 DB 에 반영하고 싶다는 의미가 내포됨.
+		// 따라서, 새로운 transaction 을 시작해야 함.
+		tx2.begin();
+		
+		// 병합 
+		// 병합이 정상적으로 완료되면, 최종 결과물인 영속 상태의 entity 가 반환됨.
+		// 두 가지 상태의 entity 가 공존하게 됨.
+		// - 준연속 상태의 entity : mergeEmployee() 의 매개변수
+		// - 영속 상태의 entity : merge() 의 반환 결과물
+		Employee1 mergeEmployee =  em2.merge(employee);
+		
+		// 트랜잭션 종료.
+		// 변경사항을 sql로 만들어서 H2 DB 에 전송해야 함. 
+		// 최종적으로 DB 에 변경사항이 반영됨.
+		tx2.commit();
+		
+		// 두 가지 상태의 entity 의 상태를 확인 및 비교
+		System.out.println("employee(준영속 entity) : " + employee.toString());
+		
+		System.out.println("mergeEmployee(영속 entiry) : " + mergeEmployee.toString());
+		
+		
 		
 		System.out.println("============= mergeEmployee() start =============");
 	}
