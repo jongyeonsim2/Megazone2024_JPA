@@ -13,7 +13,7 @@ import com.rubypaper.biz.domain.Employee2;
  * 엔터티 조회 : 영속성 컨테이너에 존재하지 않는 엔터티를 조회하는 실습
  */
 
-public class Employee2ServiceClient1 {
+public class Employee2ServiceClient2 {
 
 	public static void main(String[] args) {
 		EntityManagerFactory emf = 
@@ -37,6 +37,18 @@ public class Employee2ServiceClient1 {
 			em.persist(employee);
 			tx.commit(); //flush 동작, 묵시적 flush
 			//em.flush(); // 명시적 flush 동작
+			
+			// 사원 검색
+			Employee2 findEmp1 = em.find(Employee2.class, 1L);
+			Employee2 findEmp2 = em.find(Employee2.class, 1L);
+			
+			// 엔터티에 대한 동일성 비교
+			// ( 1차 캐시의 장점, 1차 캐시의 구조가 key, value 형태로 관리가 되고 있기 때문 )
+			// find() 호출했지만, select 문장이 발생하지 않음.
+			// => 1차 캐시를 사용하고 있음. => application 의 성능에 도움이 됨.
+			if ( findEmp1 == findEmp2 ) {
+				System.out.println("findEmp1 와 findEmp2 는 동일한 엔터티임.");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
