@@ -18,13 +18,39 @@ public class Employee1ServiceClient6 {
 	
 	// Entity 등록 후 준영속 상태로 변경
 	static Employee1 createEmployee(String name) {
+		System.out.println("============= createEmployee() start =============");
+		// 첫 번째 영속성 컨테이너 시작
+		EntityManager em1 = emf.createEntityManager();
+		EntityTransaction tx1 = em1.getTransaction();
 		
-		return null;
+		// 트랜잭션 시작
+		tx1.begin();
+		
+		// 엔터티 생성 및 등록
+		Employee1 employee = new Employee1();
+		employee.setName("홍길동");
+		
+		em1.persist(employee);
+		
+		// 트랜잭션 종료
+		tx1.commit();
+		
+		// 첫 번째 영속성 컨테이너 종료
+		// 먼저 영속성 컨테이너에 있는 entity 를 분리 후 컨테이너 종료됨
+		em1.close();
+		
+		System.out.println("============= createEmployee() end =============");
+		
+		// 준영속 상태의 entity 가 반환됨.
+		return employee;
 	}
 	
 	// 준영속 상태의 메소드를 영속상태로 변경
 	static void mergeEmployee(Employee1 employee) {
+		System.out.println("============= mergeEmployee() end =============");
 		
+		
+		System.out.println("============= mergeEmployee() start =============");
 	}
 	
 	public static void main(String[] args) {
