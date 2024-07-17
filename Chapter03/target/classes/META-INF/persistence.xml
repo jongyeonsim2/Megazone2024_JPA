@@ -25,7 +25,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.id.new_generator_mappings"
 				value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 
 		</properties>
 

@@ -9,12 +9,20 @@ import javax.persistence.Persistence;
 import com.rubypaper.biz.domain.Employee2;
 
 /*
- * 1차 캐시의 장점에 대한 실습
- * 여기 중요한 포인트는 entity 검색을 하지만,
- * select 문장이 작성되지 않는다는 것.
+ * p.198
+ * 
+ * refresh() 메소드 이용한 엔터티 갱신 실습
+ * 
+ * 테이블의 변화를 entity에 반영.
+ * 테이블의 변화는 내가 누군가가 table 의 데이터를 수정한 경우, 
+ * application 에서 사용중인 entity 를 table 기준으로 갱신.
+ * 
+ * - 실습환경 수정
+ *   hibernate.hbm2ddl.auto 를 update 에서 create  로 수정
+ * 
  */
 
-public class Employee2ServiceClient2 {
+public class Employee2ServiceClient10 {
 
 	public static void main(String[] args) {
 		EntityManagerFactory emf = 
@@ -29,27 +37,23 @@ public class Employee2ServiceClient2 {
 		EntityTransaction tx = em.getTransaction();
 		
 		try {
-			// Entity 생성
 			Employee2 employee = new Employee2();
 			employee.setName("홍길동");
 			
-			// 트랜잭션 시작
 			tx.begin();
 			em.persist(employee);
-			tx.commit(); //flush 동작, 묵시적 flush
-			//em.flush(); // 명시적 flush 동작
+			tx.commit();
 			
-			// 사원 검색
-			Employee2 findEmp1 = em.find(Employee2.class, 1L);
-			Employee2 findEmp2 = em.find(Employee2.class, 1L);
-			
-			// 엔터티에 대한 동일성 비교
-			// ( 1차 캐시의 장점, 1차 캐시의 구조가 key, value 형태로 관리가 되고 있기 때문 )
-			// find() 호출했지만, select 문장이 발생하지 않음.
-			// => 1차 캐시를 사용하고 있음. => application 의 성능에 도움이 됨.
-			if ( findEmp1 == findEmp2 ) {
-				System.out.println("findEmp1 와 findEmp2 는 동일한 엔터티임.");
+			// 일정 시간 대기
+			// 직접 table의 데이터 수정. ( 제 3자가 데이터 수정하는 것을 가정 )
+			for(int i =0; i<30; i++) {
+				Thread.sleep(1000);//1초
+				System.out.println("다른 사용자가 데이터 수정중....");
 			}
+			
+			// 현재 사용중인 entity 를 db 기준으로 갱신
+			em.refresh(employee);
+			System.out.println("갱신된 사원 정보 : " + employee.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

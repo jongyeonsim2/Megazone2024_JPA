@@ -6,7 +6,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 
-import com.rubypaper.biz.domain.Employee1;
 import com.rubypaper.biz.domain.Employee2;
 
 /*
