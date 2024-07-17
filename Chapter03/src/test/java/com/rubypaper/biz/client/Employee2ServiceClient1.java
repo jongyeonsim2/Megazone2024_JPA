@@ -10,7 +10,7 @@ import com.rubypaper.biz.domain.Employee1;
 import com.rubypaper.biz.domain.Employee2;
 
 /*
- * 엔터티 조회 : 영속성 컨테이너에 존재하지 않는 엔터티를 조회하는 실습
+ * 묵시적 flush, 명시적 flush 실습
  */
 
 public class Employee2ServiceClient1 {

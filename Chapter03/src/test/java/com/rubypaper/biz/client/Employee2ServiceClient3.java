@@ -11,11 +11,23 @@ import com.rubypaper.biz.domain.Employee2;
 
 /*
  * 1차 캐시의 장점에 대한 실습
- * 여기 중요한 포인트는 entity 검색을 하지만,
- * select 문장이 작성되지 않는다는 것.
+ * Employee2ServiceClient2 의 실습과 달리
+ * select 문장이 발생되는 경우를 실습
+ * 
+ * 1. 기존의 table이 유지가 되도록 해야함.
+ *    영속성 메타데이터를 수정.(persistence.xml 수정)
+ *    
+ *    hibernate.hbm2ddl.auto 값을 
+ *    기존 create 에서 update로 변경해야 함.
+ *    
+ * 2. 기존 데이터를 검색
+ *    - 영속성 컨테이너가 비어있는 상태임.
+ *    - entity 를 검색.
+ *    - 1차 캐시에 해당되는 entity 가 없는 상태임.
+ *    - H2 로 가서 검색을 해야하기 때문에 select 가 작성되게 됨.
  */
 
-public class Employee2ServiceClient2 {
+public class Employee2ServiceClient3 {
 
 	public static void main(String[] args) {
 		EntityManagerFactory emf = 
@@ -30,16 +42,6 @@ public class Employee2ServiceClient2 {
 		EntityTransaction tx = em.getTransaction();
 		
 		try {
-			// Entity 생성
-			Employee2 employee = new Employee2();
-			employee.setName("홍길동");
-			
-			// 트랜잭션 시작
-			tx.begin();
-			em.persist(employee);
-			tx.commit(); //flush 동작, 묵시적 flush
-			//em.flush(); // 명시적 flush 동작
-			
 			// 사원 검색
 			Employee2 findEmp1 = em.find(Employee2.class, 1L);
 			Employee2 findEmp2 = em.find(Employee2.class, 1L);
