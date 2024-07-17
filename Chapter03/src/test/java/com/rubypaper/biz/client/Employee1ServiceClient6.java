@@ -76,6 +76,9 @@ public class Employee1ServiceClient6 {
 		
 		System.out.println("mergeEmployee(영속 entiry) : " + mergeEmployee.toString());
 		
+		System.out.println("employee 의 상태 : " + em2.contains(employee));
+		
+		System.out.println("mergeEmployee 의 상태 : " + em2.contains(mergeEmployee));
 		
 		
 		System.out.println("============= mergeEmployee() start =============");
