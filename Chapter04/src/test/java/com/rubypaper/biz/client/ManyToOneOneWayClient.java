@@ -3,6 +3,7 @@ package com.rubypaper.biz.client;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.FetchType;
 import javax.persistence.Persistence;
 
 import com.rubypaper.biz.domain.Department;
@@ -32,7 +33,45 @@ public class ManyToOneOneWayClient {
 	private static void dataSelect(EntityManagerFactory emf) {
 		EntityManager em = emf.createEntityManager();
 		Employee emp = em.find(Employee.class, 1L);
-		System.out.println(emp.toString());
+		
+		/*
+		 * ManyToOne 관계에서 조회를 하는 경우
+		 * 
+		 * 1. 기본
+		 *    outer join
+		 * 2. optional = false
+		 *    inner join => index join(성능이 좋음)
+		 * 3. fetch = FetchType.LAZY
+		 *    3.1 테이블 하나(S_EMP)로만 조회 
+		 *        employee의 멤버만 사용 => S_EMP 만 조회하면 가능
+		 *    3.2 두 테이블(S_EMP, S_DEPT) 모두 조회
+		 *    	  employee, department 멤버 모두 사용
+		 *         => S_EMP, S_DEPT 두 테이블 모두 사용해야만 조회 가능
+		 * 4. fetch = FetchType.EAGER
+		 *    기본적으로 두 테이블(S_EMP, S_DEPT) 모두 사용. 
+		 *    즉, employee의 멤버만 사용해도 S_EMP, S_DEPT 두 테이블 모두 사용.
+		 * 
+		 * 성능을 고려한다면,
+		 * 2 > 3 순으로 선택하고, 4번과 1번은 경우에 따라서 선택해서 사용하면 됨.  
+		 * 
+		 */
+		
+		
+		
+		/*
+		 * 결과 : S_EMP table 만 조회가 됨.  
+		 * 
+		 * emp.getName() 는  employee 만 해당.
+		 */
+		System.out.println(emp.getName());
+		
+		/*
+		 * 결과 : S_EMP, S_DEPT 가 모두 조회가 됨.
+		 * 
+		 * employee가 필요하지만, department 타입의 멤버까지 사용.
+		 * department 정보를 출력하기 위해서는 S_DEPT 테이블까지 필요.
+		 */
+		//System.out.println(emp.toString());
 		
 		/*
 		 * 실행 결과는 left outer join 임.
