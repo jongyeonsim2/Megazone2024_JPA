@@ -21,7 +21,8 @@ public class ManyToOneOneWayClient {
 		try {
 			// 부서 등록, 사원 등록
 			//dataInsert(emf);
-			dataSelect(emf);
+			//dataSelect(emf);
+			dataUpdate(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -30,6 +31,28 @@ public class ManyToOneOneWayClient {
 		
 	}
 	
+	// 엔터티 수정
+	private static void dataUpdate(EntityManagerFactory emf) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+		
+		// 사원의 부서 이동 시나리오
+		// 신규 부서 등록
+		Department dept = new Department();
+		dept.setName("기술영업");
+		em.persist(dept);
+		
+		// 사원의 부서 이동(변경)
+		Employee emp = em.find(Employee.class, 1L);
+		// 현재 사원번호 1번의 사원은 개발부 소속임.
+		emp.setDept(dept);
+		tx.commit();
+		
+	}
+	
+	// 엔터티 조회
 	private static void dataSelect(EntityManagerFactory emf) {
 		EntityManager em = emf.createEntityManager();
 		Employee emp = em.find(Employee.class, 1L);
@@ -92,6 +115,7 @@ public class ManyToOneOneWayClient {
 		 */
 	}
 	
+	// 엔터티 추가
 	private static void dataInsert(EntityManagerFactory emf) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction ex = em.getTransaction();
