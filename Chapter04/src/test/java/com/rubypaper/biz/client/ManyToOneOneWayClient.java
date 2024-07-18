@@ -22,7 +22,8 @@ public class ManyToOneOneWayClient {
 			// 부서 등록, 사원 등록
 			//dataInsert(emf);
 			//dataSelect(emf);
-			dataUpdate(emf);
+			//dataUpdate(emf);
+			dataDelete(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -30,6 +31,34 @@ public class ManyToOneOneWayClient {
 		}
 		
 	}
+
+	// 엔터티 삭제
+	private static void dataDelete(EntityManagerFactory emf) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+		
+		/*
+		 * ManyToOne 관계
+		 * 1. 부서를 삭제시 삭제되는 부서를 참조하는 데이터가 있음.
+		 * 2. 부서를 참조하고 있는 데이터에 대해서 참조관계를 끊으면 됨.
+		 *    사원 정보의 부서 정보는 없는 상태가 됨.(null)
+		 * 3. Employee class 의  dept 멤버에
+		 *    optional 속성에 대한 설정이 삭제와 문제가 없는지
+		 * 4. JPA 를 떠나서, 테이블 관계상에서 삭제시
+		 *    cascade 옵션을 이용해서 참조되는 데이터까지 함께 삭제가
+		 *    되도록 하려면, 어떻게?
+		 */
+		
+		Department dept = em.find(Department.class, 2L);
+		//영속성 컨테이너에서 해당 엔터티 삭제
+		em.remove(dept);
+		
+		tx.commit();
+		
+	}
+	
 	
 	// 엔터티 수정
 	private static void dataUpdate(EntityManagerFactory emf) {
@@ -45,8 +74,9 @@ public class ManyToOneOneWayClient {
 		em.persist(dept);
 		
 		// 사원의 부서 이동(변경)
-		Employee emp = em.find(Employee.class, 1L);
 		// 현재 사원번호 1번의 사원은 개발부 소속임.
+		Employee emp = em.find(Employee.class, 1L);
+		
 		emp.setDept(dept);
 		tx.commit();
 		
