@@ -54,7 +54,8 @@ public class ManyToOneOneWayClient {
 		 *    @ManyToOne(optional = false)
 		 *    
 		 *    - optional = false 이면 inner join 이 생성됨.
-		 *    - 조건에서 null 인 것은 제외. => 대상은 null 이 아닌 것.
+		 *      inner join 의 의미는
+		 *      조건에서 null 인 것은 제외. => 대상은 null 이 아닌 것.
 		 *      => null 이면 안됨.
 		 *      
 		 *    optional = false 를 optional = true 로 변경해야 함.   
