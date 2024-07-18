@@ -1,7 +1,7 @@
 package com.rubypaper.biz.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
+//@EqualsAndHashCode(exclude = "empList")
 @Entity
 @Table(name = "S_DEPT")
 public class Department {
@@ -52,7 +52,8 @@ public class Department {
 	 *      무조건 부서정보와 사원정보를 함께 조회해야 하는 경우.
 	 *      선택적으로 FetchType.EAGER 을 사용하면 됨.
 	 */
-	@OneToMany(mappedBy = "dept", fetch = FetchType.LAZY)
-	private Set<Employee> empList = new HashSet<Employee>();
+	@OneToMany(mappedBy = "dept", fetch = FetchType.EAGER)
+	private List<Employee> empList = new ArrayList<Employee>();
+	//private Set<Employee> empList = new HashSet<Employee>();
 	
 }
