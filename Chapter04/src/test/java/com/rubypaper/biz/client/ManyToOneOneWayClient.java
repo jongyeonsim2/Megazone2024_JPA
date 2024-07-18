@@ -9,6 +9,10 @@ import javax.persistence.Persistence;
 import com.rubypaper.biz.domain.Department;
 import com.rubypaper.biz.domain.Employee;
 
+/*
+ * 단방향 통신하는 테스트 프로그램
+ */
+
 public class ManyToOneOneWayClient {
 	
 
@@ -31,6 +35,7 @@ public class ManyToOneOneWayClient {
 		}
 		
 	}
+
 
 	// 엔터티 삭제
 	private static void dataDelete(EntityManagerFactory emf) {
