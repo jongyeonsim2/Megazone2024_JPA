@@ -44,12 +44,32 @@ public class ManyToOneOneWayClient {
 		 * 1. 부서를 삭제시 삭제되는 부서를 참조하는 데이터가 있음.
 		 * 2. 부서를 참조하고 있는 데이터에 대해서 참조관계를 끊으면 됨.
 		 *    사원 정보의 부서 정보는 없는 상태가 됨.(null)
+		 *    
+		 *    Referential integrity constraint violation
+		 *    참조 무결성 위배 : 2L 부서에 소속된 사원이 있음.
+		 *    
 		 * 3. Employee class 의  dept 멤버에
 		 *    optional 속성에 대한 설정이 삭제와 문제가 없는지
+		 *    
+		 *    @ManyToOne(optional = false)
+		 *    
+		 *    - optional = false 이면 inner join 이 생성됨.
+		 *    - 조건에서 null 인 것은 제외. => 대상은 null 이 아닌 것.
+		 *      => null 이면 안됨.
+		 *      
+		 *    optional = false 를 optional = true 로 변경해야 함.   
+		 *    
 		 * 4. JPA 를 떠나서, 테이블 관계상에서 삭제시
 		 *    cascade 옵션을 이용해서 참조되는 데이터까지 함께 삭제가
 		 *    되도록 하려면, 어떻게?
 		 */
+		
+		// 2L 부서에 소속된 사원 정보를 영속성 컨테이너에서 검색, 부서정보를 지움
+		Employee emp = em.find(Employee.class, 1L);
+		
+		// 2L -> null
+		// s_emp와 s_dept 의 참조 관계를 끊음.
+		emp.setDept(null); 
 		
 		Department dept = em.find(Department.class, 2L);
 		//영속성 컨테이너에서 해당 엔터티 삭제
