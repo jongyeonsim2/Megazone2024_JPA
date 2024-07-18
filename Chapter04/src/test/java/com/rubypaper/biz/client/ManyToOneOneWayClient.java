@@ -48,6 +48,8 @@ public class ManyToOneOneWayClient {
 		 * 따라서, 기본적으로 전체 사원정보가 조회되도록 하도록 하면,
 		 * outer join 이 필요하게 됨.
 		 * 
+		 * 그리고, 필요에 따라서 inner join 이 되도록 설정해서 사용하면 됨.
+		 * 
 		 */
 	}
 	
