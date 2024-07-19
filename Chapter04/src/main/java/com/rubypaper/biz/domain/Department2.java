@@ -58,7 +58,7 @@ public class Department2 {
 	 *      선택적으로 FetchType.EAGER 을 사용하면 됨.
 	 */
 	@OneToMany(mappedBy = "dept", 
-			cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+			cascade = { CascadeType.PERSIST })
 	private List<Employee2> empList = new ArrayList<Employee2>();
 	//private Set<Employee> empList = new HashSet<Employee>();
 

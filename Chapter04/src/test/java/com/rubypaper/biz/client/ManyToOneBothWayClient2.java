@@ -16,6 +16,61 @@ import com.rubypaper.biz.domain.Employee2;
 
 public class ManyToOneBothWayClient2 {
 	
+	
+	private static void dataDeleteForNull(EntityManagerFactory emf) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+		
+		// 삭제할 부서 검색
+		Department2 dept = em.find(Department2.class, 5L);
+		
+		// 사원 삭제
+		List<Employee2> empList = dept.getEmpList();
+		
+		for (Employee2 emp : empList) {
+			//emp.standby();
+			emp.setDept(null);
+		}
+		
+		em.remove(dept);
+		
+		tx.commit();
+	}
+	
+	
+	// 고아 객체 삭제 
+	// orphanRemoval = true
+	private static void dataDeleteOrphanRemoval(EntityManagerFactory emf) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+		
+		// 삭제할 부서 검색
+		Department2 dept = em.find(Department2.class, 6L);
+		
+		// 사원 삭제
+		List<Employee2> empList = dept.getEmpList();
+		// 영속성 컨테이너 에서 부서와 직원의 연관관계를 제거
+		/*
+		 * === 연관 관계 제거 ====
+		 * 제거한 위치 : 영속성 컨테이너
+		 *            에서 부서와 직원의 연관관계를 제거 => empList.clear();
+		 * 차이점이 발생 : Table 에는 아직 해당 부서에 속한 사원 정보가 존재함.
+		 * 
+		 * 그래서, 부서 엔터티와 DB의 table 의 데이터가 불일치함.
+		 * table에서 해당 부서 속한 사원정보들을 영속성 컨테이너가 자동을 삭제.
+		 * 부서 엔터티에 사원 멤버에 orphanRemoval = true 설정되어 있기 때문임.
+		 * => 고아 제거 속성
+		 * 
+		 */
+		empList.clear();
+		
+		tx.commit();
+	}
+	
 	// 영속성 전이를 활용한 엔터티 삭제
 	private static void dataDelete(EntityManagerFactory emf) {
 		EntityManager em = emf.createEntityManager();
@@ -113,7 +168,9 @@ public class ManyToOneBothWayClient2 {
 		try {
 			//dataSelect(emf);
 			//dataInsert(emf);
-			dataDelete(emf);
+			//dataDelete(emf);
+			//dataDeleteOrphanRemoval(emf);
+			dataDeleteForNull(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
