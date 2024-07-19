@@ -55,5 +55,5 @@ public class Department {
 	@OneToMany(mappedBy = "dept", fetch = FetchType.EAGER)
 	private List<Employee> empList = new ArrayList<Employee>();
 	//private Set<Employee> empList = new HashSet<Employee>();
-	
+
 }
