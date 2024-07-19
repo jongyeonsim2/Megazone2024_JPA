@@ -1,5 +1,6 @@
 package com.rubypaper.biz.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class Employee2 {
 	private String name;
 
 	//다:1 관계( 다:사원, 1:부서, 여러명의 사원이 한 부서에 속함)
-	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="DEPT_ID")//S_EMP table 생성시 FK 설정
 	private Department2 dept;
 	// FK 라는 연관관계를 가지고 있는 소유자 => Employee

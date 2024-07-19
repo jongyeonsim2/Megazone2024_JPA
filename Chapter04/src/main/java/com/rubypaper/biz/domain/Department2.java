@@ -3,6 +3,7 @@ package com.rubypaper.biz.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -56,7 +57,8 @@ public class Department2 {
 	 *      무조건 부서정보와 사원정보를 함께 조회해야 하는 경우.
 	 *      선택적으로 FetchType.EAGER 을 사용하면 됨.
 	 */
-	@OneToMany(mappedBy = "dept", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "dept", 
+			cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Employee2> empList = new ArrayList<Employee2>();
 	//private Set<Employee> empList = new HashSet<Employee>();
 

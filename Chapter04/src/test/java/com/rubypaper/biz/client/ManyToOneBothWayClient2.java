@@ -1,5 +1,7 @@
 package com.rubypaper.biz.client;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,6 +15,36 @@ import com.rubypaper.biz.domain.Employee2;
  */
 
 public class ManyToOneBothWayClient2 {
+	
+	// 영속성 전이를 활용한 엔터티 삭제
+	private static void dataDelete(EntityManagerFactory emf) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+
+		/*
+		 * Department2 에 empList 멤버에 영속성 전이 옵션이 설정됨.
+		 * CascadeType.REMOVE
+		 * 
+		 * 부서가 삭제가 되었을 때,
+		 * 해당 부서에 소속된 사원정보도 함께 삭제.
+		 */
+		
+		// 삭제할 부서의 entity 검색
+		Department2 dept = em.find(Department2.class, 7L);
+//		
+//		// 해당 부서에 속한 사원 정보 삭제
+//		List<Employee2> empList = dept.getEmpList();
+//		for(Employee2 emp : empList) {
+//			em.remove(emp);
+//		}
+		
+		em.remove(dept);
+		
+		tx.commit();
+	}
+	
 	
 	// 엔터티를 영속성 컨테이너에 등록
 	private static void dataInsert(EntityManagerFactory emf) {
@@ -28,7 +60,7 @@ public class ManyToOneBothWayClient2 {
 		
 		// 사원등록 => 영속 상태임.
 		Employee2 emp1 = new Employee2();
-		emp1.setName("박문수5");
+		emp1.setName("박문수6");
 		emp1.setDept(dept);
 		em.persist(emp1);
 		
@@ -80,7 +112,8 @@ public class ManyToOneBothWayClient2 {
 
 		try {
 			//dataSelect(emf);
-			dataInsert(emf);
+			//dataInsert(emf);
+			dataDelete(emf);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
