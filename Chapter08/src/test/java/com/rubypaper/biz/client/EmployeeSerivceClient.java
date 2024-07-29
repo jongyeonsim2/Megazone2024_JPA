@@ -29,8 +29,9 @@ public class EmployeeSerivceClient {
 		EmployeeService employeeService = 
 				(EmployeeService) container.getBean("empService");
 
-		//dataInsert(deptService, employeeService);
+		dataInsert(deptService, employeeService);
 		dataSelect(employeeService);
+		dataSelect(deptService);
 
 		container.close();
 	}
@@ -44,6 +45,19 @@ public class EmployeeSerivceClient {
 					employee.getName() + " 의 부서명 : "
 					+ employee.getDept().getName()
 					);
+		}
+	}
+	
+	private static void dataSelect(DepartmentService departmentService) {
+		Department department = new Department();
+		department.setDeptId(1L);
+		Department findDept = departmentService.getDepartment(department);
+		
+		System.out.println("부서명 : " + findDept.getName());
+		
+		System.out.println("사원 정보");
+		for (Employee employee : findDept.getEmployeeList()) {
+			System.out.println("---->" + employee.toString());
 		}
 	}
 

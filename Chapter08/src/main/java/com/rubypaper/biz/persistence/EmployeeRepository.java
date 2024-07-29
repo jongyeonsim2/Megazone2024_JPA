@@ -52,6 +52,6 @@ public class EmployeeRepository {
 		String jpql2 = "FROM Employee emp JOIN FETCH emp.dept dept "
 				+ "ORDER BY emp.id DESC";
 		
-		return em.createQuery(jpql1).getResultList();
+		return em.createQuery(jpql2).getResultList();
 	}
 }
