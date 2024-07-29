@@ -2,8 +2,9 @@ package com.rubypaper.biz.client;
 
 import java.util.List;
 
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.rubypaper.biz.config.SpringConfiguration;
 import com.rubypaper.biz.domain.Department;
 import com.rubypaper.biz.domain.Employee;
 import com.rubypaper.biz.service.DepartmentService;
@@ -17,8 +18,11 @@ public class EmployeeSerivceClient {
 		 * - 개발자가 객체 생성 및 관리를 다른 누군가에게 위임을 하고 싶음.
 		 *   => new 연산자를 사용하지 않게 되어, 약결합으로 구현이 가능해짐.
 		 */
-		GenericXmlApplicationContext container = 
-				new GenericXmlApplicationContext("spring/business-layer.xml");
+//		GenericXmlApplicationContext container = 
+//				new GenericXmlApplicationContext("spring/business-layer.xml");
+		
+		AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(
+				SpringConfiguration.class);
 		
 		/*
 		 * spring container 에게 객체 생성을 위임하여,
@@ -29,8 +33,8 @@ public class EmployeeSerivceClient {
 		EmployeeService employeeService = 
 				(EmployeeService) container.getBean("empService");
 
-		//dataInsert(deptService, employeeService);
-		//dataSelect(employeeService);
+		dataInsert(deptService, employeeService);
+		dataSelect(employeeService);
 		dataSelect(deptService);
 
 		container.close();

@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rubypaper.biz.domain.Department;
-import com.rubypaper.biz.persistence.DepartmentRepository;
+//import com.rubypaper.biz.persistence.DepartmentRepository;
+import com.rubypaper.biz.repository.DepartmentRepository;
 
 @Service("deptService")
 @Transactional
@@ -16,10 +17,12 @@ public class DepartmentService {
 	
 	@Transactional
 	public void insertDepartment(Department department) {
-		deptRepository.insertDepartment(department);
+		//deptRepository.insertDepartment(department);
+		deptRepository.save(department);
 	}
 
 	public Department getDepartment(Department department) {
-		return deptRepository.getDepartment(department);
+		//return deptRepository.getDepartment(department);
+		return deptRepository.findById(department.getDeptId()).get();
 	}
 }
