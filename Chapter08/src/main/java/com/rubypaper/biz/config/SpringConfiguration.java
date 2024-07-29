@@ -29,6 +29,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 비즈니스 메소드에 대한 트랜잭션 관리를 알아서 해줌.
  */
 @EnableTransactionManagement
+
+/*
+ * 지정한 패키지 경로에서
+ * Spring Data 의 Interface 를 상속받아 구현한 Interface 를 인식해서
+ * 객제로 생성해 줌.
+ */
 @EnableJpaRepositories(basePackages = "com.rubypaper.biz.repository",
 						entityManagerFactoryRef = "factoryBean",
 						transactionManagerRef = "txManager")
