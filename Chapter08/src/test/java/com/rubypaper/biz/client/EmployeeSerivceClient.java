@@ -29,8 +29,8 @@ public class EmployeeSerivceClient {
 		EmployeeService employeeService = 
 				(EmployeeService) container.getBean("empService");
 
-		dataInsert(deptService, employeeService);
-		dataSelect(employeeService);
+		//dataInsert(deptService, employeeService);
+		//dataSelect(employeeService);
 		dataSelect(deptService);
 
 		container.close();
