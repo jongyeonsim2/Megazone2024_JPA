@@ -22,7 +22,7 @@
        - 의존성 주입(DI, Dependency Injection) 기능을 지원함.
          Controller 와 DAO 처럼 의존관계에 있는 빈을 프레임워크가 관계를 맺어줌.
          
-       - 관정 지향(AOP, Aspect-Oriented Programming) 기능을 이용해서
+       - 관점 지향(AOP, Aspect-Oriented Programming) 기능을 이용해서
                  자원관리를 함.
                  
                  핵심 기능 외에 부수적인 기능들을 분리 구현함으로써 모듈성을 증가시키는 방법.

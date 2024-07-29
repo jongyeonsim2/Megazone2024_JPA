@@ -1,0 +1,7 @@
+com\rubypaper\biz\persistence\DepartmentRepository.class
+com\rubypaper\biz\service\DepartmentService.class
+com\rubypaper\App.class
+com\rubypaper\biz\service\EmployeeService.class
+com\rubypaper\biz\domain\Employee.class
+com\rubypaper\biz\domain\Department.class
+com\rubypaper\biz\persistence\EmployeeRepository.class

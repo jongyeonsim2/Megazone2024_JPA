@@ -16,15 +16,85 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    <springframework.version>5.2.5.RELEASE</springframework.version>
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- H2 데이터베이스 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.2.224</version>
+		</dependency>
+
+		<!-- Lombok 라이브러리 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.10</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- MyBatis 라이브러리 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.3</version>
+		</dependency>
+
+		<!-- 하이버네이트 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.6.9.Final</version>
+		</dependency>
+
+		<!-- 로깅 (log4j) 라이브러리 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+		<!-- 스프링 프레임워크 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+
+
   </dependencies>
 
   <build>
