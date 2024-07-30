@@ -36,10 +36,15 @@ public class Customer {
 	private String comments;		
 
 	// 회원 주소
+	/*
+	 * @Embeddable로 정의된 객체를 참조. => @Embedded
+	 */
 	@Embedded
 	private Address address; 	
 	
 	// 주문 목록
+	// Order entity 가 생성자를 통해서 객체로 생성되면,
+	// 주문 entity 가 바로 설정됨.( 연관관계 유지를 위해서 )
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
 	private List<Order> orderList = new ArrayList<Order>();
 
